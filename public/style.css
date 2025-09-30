@@ -1,0 +1,214 @@
+/* ===== Base Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ===== Theme Colors ===== */
+:root {
+  --bg: #f9f9f9;
+  --text: #333;
+  --card: #fff;
+  --border: #ddd;
+  --primary: #007bff;
+  --primary-hover: #0056b3;
+}
+
+footer{
+    text-align: center;
+}
+
+body.dark {
+  --bg: #121212;
+  --text: #e0e0e0;
+  --card: #1e1e1e;
+  --border: #333;
+  --primary: #4dabf7;
+  --primary-hover: #1a73e8;
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: var(--card);
+  padding: 22px 28px;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ===== Headings ===== */
+h1 {
+  margin-bottom: 18px;
+  transition: color 0.3s ease;
+}
+
+body.dark h1 {
+  color: white;
+}
+
+/* ===== Forms ===== */
+input[type="text"],
+input[type="email"],
+textarea,
+input.form-control,
+.form-control {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 14px;
+  transition: border 0.2s ease, background 0.3s ease, color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+input.form-control:focus,
+.form-control:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(77,171,247,.25);
+}
+
+input[type="submit"],
+button.btn,
+button.btn-primary {
+  padding: 12px;
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+input[type="submit"]:hover,
+button.btn:hover,
+button.btn-primary:hover {
+  background: var(--primary-hover);
+  color: white;
+}
+
+/* ===== Table ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+table th,
+table td {
+  border: 1px solid var(--border);
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+  background: var(--card);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+table th {
+  background: var(--primary);
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background: rgba(0,0,0,0.03);
+}
+
+body.dark table tr:nth-child(even) {
+  background: rgba(255,255,255,0.05);
+}
+
+/* ===== Links ===== */
+a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 600;
+  margin: 0 6px;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* ===== Toggle Button ===== */
+.toggle-btn button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ===== Pagination ===== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border: 1px solid var(--primary);
+  background: var(--card);
+  color: var(--primary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.18s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.pagination button.active,
+.pagination button:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ===== Dark Mode Overrides for Form Controls & Buttons ===== */
+body.dark input.form-control,
+body.dark input[type="text"],
+body.dark input[type="email"],
+body.dark textarea,
+body.dark .form-control {
+  background-color: #fff;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+body.dark input.form-control:focus,
+body.dark input[type="text"]:focus,
+body.dark input[type="email"]:focus,
+body.dark textarea:focus,
+body.dark .form-control:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(77,171,247,.25) !important;
+}
+
+body.dark button.btn-primary,
+body.dark input[type="submit"] {
+  background-color: var(--primary) !important;
+  color: white !important;
+  border-color: var(--primary) !important;
+}
+
+body.dark button.btn-primary:hover,
+body.dark input[type="submit"]:hover {
+  background-color: var(--primary-hover) !important;
+  color: white !important;
+}
