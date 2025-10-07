@@ -1,175 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Update</title>
-  <style>
-    /* Default Light Mode */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f6f8;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      transition: background 0.3s, color 0.3s;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update User</title>
 
-    .container {
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-      width: 360px;
-      text-align: center;
-      transition: background 0.3s, color 0.3s;
-    }
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    h1 {
-      margin-bottom: 20px;
-      font-size: 24px;
-      color: #444;
-    }
+<!-- GSAP & Particles.js -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
-    label {
-      display: block;
-      margin: 10px 0 5px;
-      font-weight: 600;
-      text-align: left;
-    }
+<style>
+/* 🌌 Aurora Gradient Background */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(270deg, #0f0c29, #302b63, #24243e);
+    background-size: 400% 400%;
+    animation: aurora 25s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+    overflow-x: hidden;
+}
+@keyframes aurora {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-    input[type="text"],
-    input[type="email"] {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      outline: none;
-      font-size: 14px;
-      margin-bottom: 15px;
-      transition: border 0.3s;
-    }
+/* 🔹 Particles Background */
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+}
 
-    input[type="text"]:focus,
-    input[type="email"]:focus {
-      border: 1px solid #007bff;
-    }
+/* 🔹 Glassmorphism Card */
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 30px rgba(0,255,255,0.2);
+    text-align: center;
+    color: #fff;
+    position: relative;
+}
 
-    input[type="submit"] {
-      width: 100%;
-      background: #007bff;
-      color: #fff;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
+/* Neon Glow Animation */
+@keyframes neonGlow {
+    0%, 100% { text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff; }
+    50% { text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff, 0 0 50px #00ffff; }
+}
 
-    input[type="submit"]:hover {
-      background: #0056b3;
-    }
+/* Title */
+h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #fff;
+    animation: neonGlow 3s infinite ease-in-out;
+}
 
-    .toggle-btn {
-      text-align: right;
-      margin-bottom: 15px;
-    }
+/* Form Fields */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #00ffff;
+}
+.form-group i {
+    position: absolute;
+    top: 38px;
+    left: 12px;
+    color: #00ffff;
+}
+input {
+    width: 90%;
+    padding: 12px 12px 12px 12px;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    outline: none;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    transition: 0.3s;
+}
+input:focus {
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 15px #00ffff;
+}
 
-    .toggle-btn button {
-      background: transparent;
-      border: none;
-      font-size: 20px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
+/* Button */
+button {
+    width: 90%;
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #0ff, #0aa);
+    box-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0aa;
+    transition: 0.3s;
+    animation: pulseGlow 3s infinite ease-in-out;
+}
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0aa;
+}
 
-    .toggle-btn button:hover {
-      transform: rotate(20deg);
-    }
+/* Neon Pulse Keyframes */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 10px #0ff, 0 0 20px #0ff; }
+    50% { box-shadow: 0 0 20px #0ff, 0 0 40px #0ff; }
+    100% { box-shadow: 0 0 10px #0ff, 0 0 20px #0ff; }
+}
 
-    /* Dark Mode */
-    body.dark {
-      background: #121212;
-      color: #eee;
-    }
+/* Links */
+.extra-links {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #0ff;
+}
+.extra-links a {
+    color: #0ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.extra-links a:hover {
+    text-decoration: underline;
+}
 
-    body.dark .toggle-btn button {
-      color: #eee;
-    }
-
-    body.dark h1{
-         color: #eee;
-    }
-
-    body.dark .container {
-      background: #1e1e1e;
-      color: #eee;
-    }
-
-    body.dark input[type="text"],
-    body.dark input[type="email"] {
-      background: #2a2a2a;
-      border: 1px solid #555;
-      color: #eee;
-    }
-
-    body.dark input[type="submit"] {
-      background: #0d6efd;
-    }
-
-    body.dark input[type="submit"]:hover {
-      background: #0a58ca;
-    }
-  </style>
+/* Back Button */
+.back-btn {
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 10px;
+    border-radius:10px;
+    color: #00ffff;
+    background: rgba(255,255,255,0.08);
+    text-decoration: none;
+    font-weight:600;
+    font-size:14px;
+    border: none;
+    cursor: pointer;
+    transition: transform .18s ease;
+    margin-bottom: 20px;
+}
+.back-btn i { transform: translateY(1px); }
+.back-btn:hover { transform: translateY(-4px); }
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="toggle-btn">
-      <button onclick="toggleTheme()">🌙 Toggle Dark Mode</button>
-    </div>
-    <h1>Update User</h1>
-    <form action="<?=site_url('/crud/update/'.$data['id']); ?>" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" value="<?=($data['name']); ?>" required>
+<div id="particles-js"></div>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" value="<?=($data['email']); ?>" required>
+<div class="container">
+    <a href="<?= site_url('View'); ?>" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
 
-      <input type="submit" value="Update">
+    <h1><i class="fas fa-user-edit"></i> Update User</h1>
+
+    <form action="<?= site_url('/crud/update/'.$data['id']); ?>" method="POST" autocomplete="off" novalidate>
+
+        <i class="fas fa-user"></i>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="<?= ($data['name']); ?>" required placeholder="Full name">
+        </div>
+
+        <i class="fas fa-envelope"></i>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="<?= ($data['email']); ?>" required placeholder="name@example.com">
+        </div>
+
+        <br>
+        <br>
+
+        <button type="submit"><i class="fas fa-paper-plane"></i> Update</button>
     </form>
-  </div>
+</div>
 
-  <script>
-   const toggleBtn = document.querySelector(".toggle-btn button");
+<script>
+// 🌌 Particles.js
+particlesJS("particles-js", {
+    particles: { 
+      number: { value: 80, density: { enable: true, value_area: 800 }},
+      color: { value: "#00ffff" },
+      shape: { type: "circle" },
+      opacity: { value: 0.5 },
+      size: { value: 3, random: true },
+      move: { enable: true, speed: 2 }
+    }
+});
 
-// Function to toggle dark mode and swap icon
-function toggleTheme() {
-  document.body.classList.toggle("dark");
-
-  // Swap icon based on current theme
-  if (document.body.classList.contains("dark")) {
-    toggleBtn.textContent = "☀️ Toggle Light Mode";
-    localStorage.setItem("theme", "dark");
-  } else {
-    toggleBtn.textContent = "🌙 Toggle Dark Mode";
-    localStorage.setItem("theme", "light");
-  }
-}
-
-// Auto-apply saved theme and icon on page load
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark");
-  toggleBtn.textContent = "☀️ Toggle Dark Mode";
-} else {
-  toggleBtn.textContent = "🌙 Toggle Dark Mode";
-}
-
-  </script>
+// GSAP Animation
+gsap.from("h1", { y: -50, opacity: 0, duration: 1 });
+gsap.from(".container", { y: 30, opacity: 0, duration: 1, delay: 0.3 });
+</script>
 </body>
 </html>

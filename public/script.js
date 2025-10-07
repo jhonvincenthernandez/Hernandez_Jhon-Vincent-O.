@@ -1,3 +1,5 @@
+alert("👋 Welcome to HERNANDEZ CRUD project! Enjoy your stay 😊");
+
 const toggleBtn = document.querySelector(".toggle-btn button");
 
 // Function to toggle dark mode and swap icon

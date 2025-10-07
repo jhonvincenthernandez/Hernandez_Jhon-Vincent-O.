@@ -5,34 +5,40 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-/* ===== Theme Colors ===== */
-:root {
+:root{
   --bg: #f9f9f9;
   --text: #333;
   --card: #fff;
   --border: #ddd;
   --primary: #007bff;
   --primary-hover: #0056b3;
+  --muted: #6c757d;
+  --accent: rgba(77,171,247,0.15);
+  --glass: rgba(255,255,255,0.65);
+  --shadow: 0 6px 24px rgba(16,24,40,0.08);
+  --transition-fast: 160ms cubic-bezier(.2,.8,.2,1);
+  --transition-medium: 300ms cubic-bezier(.2,.8,.2,1);
 }
 
-footer{
-    text-align: center;
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background var(--transition-medium), color var(--transition-medium);
 }
 
+/* ===== Dark theme variables ===== */
 body.dark {
-  --bg: #121212;
-  --text: #e0e0e0;
-  --card: #1e1e1e;
-  --border: #333;
+  --bg: #0f1720;
+  --text: #e6eef8;
+  --card: #111319;
+  --border: #2a2f36;
   --primary: #4dabf7;
   --primary-hover: #1a73e8;
+  --muted: #9aa4b2;
+  --accent: rgba(77,171,247,0.12);
+  --glass: rgba(255,255,255,0.03);
+  --shadow: 0 8px 28px rgba(2,6,23,0.6);
 }
 
 /* ===== Container ===== */
@@ -42,25 +48,32 @@ body.dark {
   background: var(--card);
   padding: 22px 28px;
   border-radius: 12px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
-  transition: background 0.3s ease, color 0.3s ease;
+  box-shadow: var(--shadow);
+  transition: background var(--transition-medium), color var(--transition-medium), transform 300ms;
+  will-change: transform;
+}
+
+/* lift slightly on hover for desktop */
+@media (hover: hover) and (pointer: fine) {
+  .container:hover {
+    transform: translateY(-4px);
+  }
 }
 
 /* ===== Headings ===== */
 h1 {
   margin-bottom: 18px;
-  transition: color 0.3s ease;
+  transition: color var(--transition-medium);
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
-body.dark h1 {
-  color: white;
-}
+body.dark h1 { color: #fff; }
 
-/* ===== Forms ===== */
+/* ===== Inputs & form controls ===== */
 input[type="text"],
 input[type="email"],
 textarea,
-input.form-control,
 .form-control {
   padding: 10px 12px;
   border: 1px solid var(--border);
@@ -68,147 +81,223 @@ input.form-control,
   background: var(--card);
   color: var(--text);
   font-size: 14px;
-  transition: border 0.2s ease, background 0.3s ease, color 0.3s ease;
+  transition: border var(--transition-fast), background var(--transition-medium), box-shadow var(--transition-fast), color var(--transition-medium);
 }
 
+/* subtle focus glow */
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus,
-input.form-control:focus,
 .form-control:focus {
   border-color: var(--primary);
+  box-shadow: 0 6px 18px var(--accent);
   outline: none;
-  box-shadow: 0 0 0 0.2rem rgba(77,171,247,.25);
 }
 
+/* ===== Buttons ===== */
+.btn, button, input[type="submit"], .toggle-btn button, .back-btn {
+  transition: transform 180ms cubic-bezier(.2,.9,.2,1), box-shadow 180ms, background var(--transition-fast), color var(--transition-fast);
+  will-change: transform, box-shadow;
+}
+
+/* primary look */
 input[type="submit"],
 button.btn,
 button.btn-primary {
-  padding: 12px;
+  padding: 10px 14px;
   background: var(--primary);
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  box-shadow: 0 6px 18px rgba(8,35,102,0.08);
 }
 
-input[type="submit"]:hover,
-button.btn:hover,
-button.btn-primary:hover {
-  background: var(--primary-hover);
-  color: white;
+/* micro-interaction */
+@media (hover: hover) and (pointer: fine) {
+  input[type="submit"]:hover,
+  button.btn:hover,
+  button.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(8,35,102,0.12);
+    background: var(--primary-hover);
+  }
+
+  input[type="submit"]:active,
+  button.btn:active,
+  button.btn-primary:active {
+    transform: translateY(0) scale(0.995);
+  }
 }
 
-/* ===== Table ===== */
+/* Toggle & Back button styles */
+.toggle-btn { text-align: right; margin-bottom: 8px; }
+.toggle-btn button {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: inherit;
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .toggle-btn button:hover { transform: rotate(12deg) translateY(-2px); color: var(--primary); }
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--muted);
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 16px rgba(16,24,40,0.06);
+}
+@media (hover: hover) and (pointer: fine) {
+  .back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(16,24,40,0.12);
+    background: color-mix(in srgb, var(--muted) 70%, black 30%);
+  }
+}
+
+/* ensure back button adapts dark mode */
+body.dark .back-btn { background: #495057; color: var(--text); }
+
+/* ===== Table styling & hover ===== */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 12px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 table th,
 table td {
-  border: 1px solid var(--border);
-  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 14px;
   text-align: center;
   vertical-align: middle;
   background: var(--card);
   color: var(--text);
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background var(--transition-fast), color var(--transition-fast), transform 180ms;
 }
 
+/* header style */
 table th {
-  background: var(--primary);
-  color: white;
-}
-
-table tr:nth-child(even) {
-  background: rgba(0,0,0,0.03);
-}
-
-body.dark table tr:nth-child(even) {
-  background: rgba(255,255,255,0.05);
-}
-
-/* ===== Links ===== */
-a {
-  text-decoration: none;
-  color: var(--primary);
+  background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary) 60%, black 20%));
+  color: #fff;
   font-weight: 600;
+}
+
+/* row hover lift + subtle bg */
+@media (hover: hover) and (pointer: fine) {
+  tbody tr {
+    transition: transform 220ms var(--transition-fast), background 220ms;
+  }
+  tbody tr:hover {
+    transform: translateY(-4px);
+    background: color-mix(in srgb, var(--card) 88%, var(--accent) 12%);
+    box-shadow: 0 10px 24px rgba(2,6,23,0.04);
+  }
+}
+
+/* zebra rows */
+table tr:nth-child(even) { background: rgba(0,0,0,0.03); }
+body.dark table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+/* Action links (Edit / Delete) — pill buttons */
+.actions a {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
   margin: 0 6px;
-  transition: color 0.2s ease;
+  transition: transform 160ms, background 160ms, color 160ms;
 }
 
-a:hover {
-  color: var(--primary-hover);
+/* edit */
+.actions a.edit {
+  background: rgba(76,175,80,0.12);
+  color: #2e7d32;
+}
+.actions a.edit:hover { transform: translateY(-2px); background: rgba(76,175,80,0.18); }
+
+/* delete */
+.actions a.delete {
+  background: rgba(255,82,82,0.12);
+  color: #c62828;
+}
+.actions a.delete:hover { transform: translateY(-2px); background: rgba(255,82,82,0.18); }
+
+/* ===== Links with underline animation ===== */
+a.My_link, a {
+  position: relative;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition-fast);
 }
 
-/* ===== Toggle Button ===== */
-.toggle-btn button {
-  background: var(--primary);
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 14px;
+a::after, a.My_link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+  transition: width 260ms var(--transition-fast);
+  border-radius: 2px;
 }
+
+a:hover::after, a.My_link:hover::after {
+  width: 100%;
+}
+
+/* enhance footer link */
+footer { margin-top: 30px; text-align: center; padding: 12px 8px; color: var(--muted); }
+footer a { color: var(--muted); font-weight: 600; }
+footer a:hover { color: var(--primary); }
 
 /* ===== Pagination ===== */
-.pagination {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 16px;
-}
-
+.pagination { display:flex; justify-content:center; gap:8px; margin-top:16px; }
 .pagination button {
-  padding: 6px 12px;
-  border: 1px solid var(--primary);
-  background: var(--card);
-  color: var(--primary);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.18s ease, background 0.3s ease, color 0.3s ease;
+  padding:6px 12px; border-radius:8px; border:1px solid var(--border); background:var(--card); color:var(--text);
+  transition: transform 160ms, box-shadow 160ms, background 160ms;
 }
+.pagination button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(2,6,23,0.06); background: color-mix(in srgb, var(--card) 80%, var(--accent) 20%); }
+.pagination button.active { background: var(--primary); color: white; box-shadow: 0 10px 24px rgba(8,35,102,0.12); }
 
-.pagination button.active,
-.pagination button:hover {
-  background: var(--primary);
-  color: white;
-}
-
-/* ===== Dark Mode Overrides for Form Controls & Buttons ===== */
-body.dark input.form-control,
+/* ===== Dark mode overrides for form controls (bootstrap compatibility) ===== */
+body.dark .form-control,
 body.dark input[type="text"],
 body.dark input[type="email"],
-body.dark textarea,
-body.dark .form-control {
-  background-color: #fff;
+body.dark textarea {
+  background-color: #1a1a1a !important;
   color: var(--text) !important;
   border-color: var(--border) !important;
 }
 
-body.dark input.form-control:focus,
+body.dark .form-control:focus,
 body.dark input[type="text"]:focus,
 body.dark input[type="email"]:focus,
-body.dark textarea:focus,
-body.dark .form-control:focus {
+body.dark textarea:focus {
   border-color: var(--primary) !important;
-  box-shadow: 0 0 0 0.2rem rgba(77,171,247,.25) !important;
+  box-shadow: 0 6px 18px var(--accent) !important;
 }
 
-body.dark button.btn-primary,
-body.dark input[type="submit"] {
-  background-color: var(--primary) !important;
-  color: white !important;
-  border-color: var(--primary) !important;
-}
+/* small accessibility focus */
+:focus { outline: 3px solid rgba(77,171,247,0.12); outline-offset: 2px; transition: outline 120ms; }
 
-body.dark button.btn-primary:hover,
-body.dark input[type="submit"]:hover {
-  background-color: var(--primary-hover) !important;
-  color: white !important;
+/* reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; transform: none !important; }
 }
