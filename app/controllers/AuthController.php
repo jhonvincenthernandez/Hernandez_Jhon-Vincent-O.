@@ -83,8 +83,6 @@ class AuthController extends Controller {
         if ($this->Auth->has_role('admin')) {
             redirect('View');
             exit;
-        }else{
-            echo ("Sorry you are not Admin,Register as an admin to access");
         }
 
         $this->call->view('auth/dashboard');
