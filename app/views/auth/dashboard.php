@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register | Access Required</title>
+<title>Access Denied | Dashboard</title>
 
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -59,10 +59,9 @@ body {
 /* ✨ Neon Title */
 h1 {
     font-size: 28px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     color: #00ffff;
     text-shadow: 0 0 10px #00ffff, 0 0 30px #00ffff;
-    letter-spacing: 1px;
     animation: pulseText 3s infinite ease-in-out;
 }
 @keyframes pulseText {
@@ -70,52 +69,38 @@ h1 {
     50% { text-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff; }
 }
 
-/* 📋 Form */
-.form-group {
-    text-align: left;
-    margin-bottom: 20px;
-    position: relative;
-}
-label {
-    font-size: 14px;
-    font-weight: bold;
-    color: #00ffff;
-    display: block;
-    margin-bottom: 6px;
-}
-input, select {
-    width: 100%;
-    padding: 12px 15px;
-    border: none;
+/* ⚠️ Warning Message */
+.warning {
+    background: rgba(255, 0, 0, 0.2);
+    border: 1px solid rgba(255,0,0,0.4);
+    padding: 15px;
     border-radius: 12px;
-    background: rgba(255,255,255,0.1);
-    color: #fff;
-    outline: none;
-    transition: 0.3s;
-}
-input:focus, select:focus {
-    border: 2px solid #00ffff;
-    box-shadow: 0 0 15px #00ffff;
+    margin-bottom: 25px;
+    color: #ff6666;
+    font-weight: bold;
+    font-size: 15px;
 }
 
-/* 💫 Register Button */
-button {
+/* 🔘 Buttons */
+.btn {
+    display: inline-block;
     width: 100%;
+    max-width: 250px;
     padding: 12px;
-    margin-top: 10px;
-    background: linear-gradient(135deg, #00ffff, #0088ff);
-    border: none;
     border-radius: 30px;
-    color: #fff;
+    border: none;
+    cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #00ffff, #0088ff);
+    box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
     transition: 0.3s;
     animation: pulseGlow 3s infinite ease-in-out;
 }
-button:hover {
+.btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 0 20px #00ffff, 0 0 50px #00ffff;
+    box-shadow: 0 0 25px #00ffff, 0 0 50px #00ffff;
 }
 @keyframes pulseGlow {
     0% { box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
@@ -123,21 +108,9 @@ button:hover {
     100% { box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
 }
 
-/* ⚠️ Access Message */
-.warning {
-    background: rgba(255, 0, 0, 0.2);
-    border: 1px solid rgba(255,0,0,0.4);
-    padding: 12px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    color: #ff6666;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-/* 🔗 Footer */
+/* 🔗 Extra Links */
 .extra-links {
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 14px;
 }
 .extra-links a {
@@ -154,34 +127,16 @@ button:hover {
 <div id="particles-js"></div>
 
 <div class="container">
+    <h1><i class="fas fa-exclamation-triangle"></i> Access Denied</h1>
+
     <div class="warning">
         ⚠️ Sorry, you are not an admin.<br>
         Register as an <b>Admin</b> to access the full dashboard.
     </div>
 
-    <h1><i class="fas fa-user-plus"></i> Register Account</h1>
-
-    <form action="<?= site_url('auth/register'); ?>" method="post">
-        <div class="form-group">
-            <label><i class="fas fa-user"></i> Username</label>
-            <input type="text" name="username" placeholder="Enter username" required>
-        </div>
-
-        <div class="form-group">
-            <label><i class="fas fa-lock"></i> Password</label>
-            <input type="password" name="password" placeholder="Enter password" required>
-        </div>
-
-        <div class="form-group">
-            <label><i class="fas fa-users-cog"></i> Role</label>
-            <select name="role" required>
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
-
-        <button type="submit"><i class="fas fa-paper-plane"></i> Register</button>
-    </form>
+    <a href="<?= site_url('auth/register'); ?>" class="btn">
+        <i class="fas fa-user-plus"></i> Register Account
+    </a>
 
     <div class="extra-links">
         Already have an account? <a href="<?= site_url('auth/login'); ?>">Login here</a>
@@ -201,11 +156,10 @@ particlesJS("particles-js", {
     }
 });
 
-// 🎬 GSAP Entry Animations
+// 🎬 GSAP Animations
 gsap.from(".container", { y: 40, opacity: 0, duration: 1 });
 gsap.from(".warning", { opacity: 0, scale: 0.9, duration: 1, delay: 0.3 });
 gsap.from("h1", { opacity: 0, y: -30, duration: 1, delay: 0.5 });
-gsap.from("form", { opacity: 0, y: 20, duration: 1, delay: 0.8 });
 </script>
 </body>
 </html>
